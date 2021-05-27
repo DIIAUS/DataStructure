@@ -213,11 +213,11 @@ int main()
     b.add(20);
     b.add(10);
     
-    b.add(25);
+    b.add(25); // Bug
    
     // b.add(20);
     b.add(26);
-    b.add(25);
+    //b.add(25);  Bug
     
     
 
