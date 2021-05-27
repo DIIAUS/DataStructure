@@ -5,7 +5,10 @@ using namespace std;
 struct node{
     int val; 
     node* next; 
+    
 };
+
+
 
 class Single_LinkList{
     private: 
@@ -99,30 +102,135 @@ class Single_LinkList{
 };
 
 
+struct db_node{
+    int val;
+    db_node* next; 
+    db_node* prev;
+};
+
+class Double_LinkList{
+    
+    private: 
+        db_node*head;
+        db_node*tail; 
+    public:
+        Double_LinkList(){
+            head=NULL;
+            tail=NULL;
+        }
+        void add(int data){
+            db_node*tmp = new db_node;
+            tmp->val=data;
+            if(head == NULL){
+                tmp->next=NULL;
+                tmp->prev=NULL;
+                head=tmp;
+                tail=tmp;
+            }
+            else{
+                if(data<=head->val){
+                    tmp->next = head;
+                    tmp->prev = NULL; 
+                    head->prev=tmp;
+                    head=tmp;
+                } 
+                else if(data>=tail->val){
+                    tmp->next=NULL;
+                    tmp->prev=tail->next;
+                    tail->next=tmp;
+                    tail=tmp;
+
+                }
+                else if(data>head->val){ // seeIt case double number is Error is 25 and 25 
+
+                    db_node* p ;
+                    p=head->next;
+                    while(true){
+                        if(data<=p->val){
+                            if(p->next==NULL){
+                                tmp->next=tail;
+                                tmp->prev=p->prev->next;
+                                p->prev->next=tmp;
+                                p->prev=tmp;
+                                break;
+                            }
+                            else{
+                                tmp->next=p;
+                                tmp->prev=p->prev;
+
+                                p->prev->next=tmp;
+                                p->prev=tmp;
+                                break; 
+                            }
+                        }
+                        else{
+                            if(p==NULL){
+                                cout<<"ISEMPTY\t"; 
+                                break;
+                            }
+                            p=p->next;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        void del(){
+            //
+        }
+
+        void display(){
+            db_node*p =new db_node;
+            p = head;  
+            while(p !=NULL){
+            cout<< p ->val << "\t";
+            p = p ->next;
+        }
+    }
+
+
+};
+
+
 int main()
 {
-    Single_LinkList a ;
-    a.add(30);
-    a.add(20);
-    a.add(50);
-    a.add(10);
-    a.add(10);
-    a.add(2);
-    a.add(10);
-    a.add(15);
-    a.add(40);
-    a.add(100);
+    // Single_LinkList a ;
+    // a.add(30);
+    // a.add(20);
+    // a.add(50);
+    // a.add(10);
+    // a.add(10);
+    // a.add(2);
+    // a.add(10);
+    // a.add(15);
+    // a.add(40);
+    // a.add(100);
     
-    a.del(2);
-    a.del(10);
-    a.del(15);
-    a.del(50);
-    a.del(100);
+    Double_LinkList b ;
+    b.add(50);
+    b.add(20);
+    b.add(20);
+    b.add(10);
+    
+    b.add(25);
+   
+    // b.add(20);
+    b.add(26);
+    b.add(25);
+    
+    
 
-    a.add(1000);
-    a.add(1);
-    a.add(25);    
     
     
-    a.display();
+  
+    
+    
+   
+
+    
+    
+    //a.display();
+    b.display();
+    
 }
